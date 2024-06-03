@@ -74,6 +74,8 @@ export async function fetchCardData() {
       invoiceStatusPromise,
     ]);
 
+    console.log('data', data)
+
     const numberOfInvoices = Number(data[0].rows[0].count ?? '0');
     const numberOfCustomers = Number(data[1].rows[0].count ?? '0');
     const totalPaidInvoices = formatCurrency(data[2].rows[0].paid ?? '0');
@@ -87,7 +89,7 @@ export async function fetchCardData() {
     };
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch card data.');
+    // throw new Error('Failed to fetch card data.');
   }
 }
 
@@ -168,6 +170,7 @@ export async function fetchInvoiceById(id: string) {
       // Convert amount from cents to dollars
       amount: invoice.amount / 100,
     }));
+
 
     return invoice[0];
   } catch (error) {
